@@ -8,10 +8,25 @@ export default function SignupPage() {
   const router = useRouter();
 
   const handleSignup = async (data: any) => {
-    // TODO: Implement actual signup logic here
-    console.log("Signup data:", data);
-    // Redirect to dashboard after successful signup
-    router.push("/dashboard");
+    try {
+      const response = await fetch('/api/auth/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(result.error || 'Signup failed');
+      }
+
+      // Redirect to login page after successful signup
+      router.push('/login');
+    } catch (error) {
+      console.error('Signup error:', error);
+      throw error;
+    }
   };
 
   return (

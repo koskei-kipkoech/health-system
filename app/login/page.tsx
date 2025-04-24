@@ -8,9 +8,28 @@ export default function LoginPage() {
   const router = useRouter();
 
   const handleLogin = async (data: any) => {
-    console.log("Login data:", data);
-    // Redirect to dashboard after successful login
-    router.push("/dashboard");
+    try {
+      const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(result.error || 'Login failed');
+      }
+
+      // Store token in sessionStorage
+      sessionStorage.setItem('token', result.token);
+      
+      // Redirect to dashboard after successful login
+      router.push('/dashboard');
+    } catch (error) {
+      console.error('Login error:', error);
+      throw error;
+    }
   };
 
   return (

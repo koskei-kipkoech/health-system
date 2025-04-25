@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
-import { FaHospital } from 'react-icons/fa'
+import { FaHospital, FaUserCircle } from 'react-icons/fa'
 import { useAuth } from '@/lib/auth'
 
 const publicNavItems = [
@@ -14,13 +14,14 @@ const publicNavItems = [
 
 const privateNavItems = [
   { name: 'Home', href: '/' },
+  { name: 'Dashboard', href: '/dashboard' },
   { name: 'Programs', href: '/programs' },
   { name: 'Clients', href: '/clients' },
-  { name: 'Dashboard', href: '/dashboard' },
 ]
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
+  const [showUserMenu, setShowUserMenu] = useState(false)
   const { user, isAuthenticated, logout } = useAuth()
 
   return (
@@ -46,7 +47,8 @@ export function Navbar() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-4">
+            <div className="ml-10 flex items-center space-x-4">
+              {/* Navigation Items */}
               {(isAuthenticated ? privateNavItems : publicNavItems).map((item, i) => (
                 <motion.div
                   key={item.name}
@@ -63,6 +65,48 @@ export function Navbar() {
                   </Link>
                 </motion.div>
               ))}
+              
+              {/* User Profile and Logout for Desktop */}
+              {isAuthenticated && (
+                <div className="relative ml-3">
+                  <motion.div
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: privateNavItems.length * 0.1 }}
+                  >
+                    <button
+                      onClick={() => setShowUserMenu(!showUserMenu)}
+                      className="flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium text-neutral-900 dark:text-white
+                                hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-all duration-300"
+                    >
+                      <FaUserCircle className="h-5 w-5" />
+                      <span>{user?.name}</span>
+                    </button>
+                  </motion.div>
+                  
+                  {/* Dropdown Menu */}
+                  <AnimatePresence>
+                    {showUserMenu && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        className="absolute right-0 mt-2 w-48 bg-white dark:bg-neutral-900 rounded-md shadow-lg py-1 z-10"
+                      >
+                        <button
+                          onClick={() => {
+                            logout();
+                            setShowUserMenu(false);
+                          }}
+                          className="w-full text-left block px-4 py-2 text-sm text-neutral-700 dark:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800"
+                        >
+                          Logout
+                        </button>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              )}
             </div>
           </div>
 

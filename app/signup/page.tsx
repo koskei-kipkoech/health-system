@@ -3,7 +3,6 @@
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { AuthForm } from "@/components/ui/auth-form";
-import { BackButton } from "@/components/ui/back-button";
 
 export default function SignupPage() {
   const router = useRouter();
@@ -37,7 +36,7 @@ export default function SignupPage() {
         Already have an account?{" "}
         <Link
           href="/login"
-          className="font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400"
+          className="font-medium text-blue-600 hover:text-primary-500 dark:text-primary-400"
         >
           Sign in
         </Link>

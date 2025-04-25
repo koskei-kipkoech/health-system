@@ -4,7 +4,6 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { AuthForm } from "@/components/ui/auth-form";
 import { useAuth } from "@/lib/auth";
-import { BackButton } from "@/components/ui/back-button";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -47,7 +46,7 @@ export default function LoginPage() {
         Don't have an account?{" "}
         <Link
           href="/signup"
-          className="font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400"
+          className="font-medium text-blue-600 hover:text-primary-500 dark:text-primary-400"
         >
           Sign up
         </Link>

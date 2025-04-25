@@ -13,20 +13,30 @@ type AuthContextType = {
   login: (userData: User) => void;
   logout: () => void;
   isAuthenticated: boolean;
+  loading: boolean; // Added loading state
 };
 
-const AuthContext = createContext<AuthContextType>({user: null, login: () => {}, logout: () => {}, isAuthenticated: false});
+const AuthContext = createContext<AuthContextType>({user: null, login: () => {}, logout: () => {}, isAuthenticated: false, loading: true});
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [loading, setLoading] = useState(true); // Added loading state, default true
 
   useEffect(() => {
     // Check for existing user data in sessionStorage
-    const storedUser = sessionStorage.getItem('user');
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-      setIsAuthenticated(true);
+    try {
+      const storedUser = sessionStorage.getItem('user');
+      if (storedUser) {
+        setUser(JSON.parse(storedUser));
+        setIsAuthenticated(true);
+      }
+    } catch (error) {
+      console.error("Failed to parse user from sessionStorage", error);
+      // Handle error, maybe clear storage
+      sessionStorage.removeItem('user');
+    } finally {
+      setLoading(false); // Set loading to false after check
     }
   }, []);
 
@@ -44,7 +54,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, isAuthenticated }}>
+    <AuthContext.Provider value={{ user, login, logout, isAuthenticated, loading }}>
       {children}
     </AuthContext.Provider>
   );

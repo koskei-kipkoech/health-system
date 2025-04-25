@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { BackButton } from "./back-button";
 import { useRouter } from 'next/navigation';
+import { ProgramSelection } from "./program-selection";
 
 interface ClientFormData {
   name: string;
@@ -28,6 +29,7 @@ interface ClientFormData {
     relationship: string;
     phone: string;
   };
+  enrolledPrograms: string[];
 }
 
 export function ClientRegistrationForm({ onSubmit }: { onSubmit: (data: ClientFormData) => void }) {
@@ -37,7 +39,12 @@ export function ClientRegistrationForm({ onSubmit }: { onSubmit: (data: ClientFo
     handleSubmit,
     formState: { errors },
     reset,
+    setValue,
   } = useForm<ClientFormData>();
+
+  const handleProgramsSelected = (programIds: string[]) => {
+    setValue('enrolledPrograms', programIds);
+  };
 
   return (
     <>
@@ -197,6 +204,11 @@ export function ClientRegistrationForm({ onSubmit }: { onSubmit: (data: ClientFo
               />
               {errors.emergencyContact?.phone && <p className="mt-1 text-sm text-red-600">{errors.emergencyContact.phone.message}</p>}
             </div>
+          </div>
+
+          {/* Program Selection */}
+          <div className="space-y-4 mt-8">
+            <ProgramSelection onProgramsSelected={handleProgramsSelected} />
           </div>
 
           <div className="mt-8">

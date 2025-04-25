@@ -4,6 +4,7 @@ import React, { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/lib/auth';
 import { motion } from 'framer-motion';
+import DoctorSidebar from '@/components/ui/sidebar';
 
 const DashboardPage = () => {
   const { user, loading, logout } = useAuth();
@@ -43,28 +44,11 @@ const DashboardPage = () => {
         </motion.div>
 
         {/* Placeholder for Dashboard Content */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8"
-        >
-          <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6">Dashboard Overview</h2>
-          <p className="text-gray-600 dark:text-gray-300">
-            This is your personalized dashboard. More features coming soon!
-          </p>
-          <p className="text-gray-600 dark:text-gray-300 mt-2">
-            Your specialization: {user.specialization || 'Not specified'}
-          </p>
-          <button 
-            onClick={logout} 
-            className="mt-6 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition-colors duration-200"
-          >
-            Logout
-          </button>
-        </motion.div>
+        <DoctorSidebar/>
       </div>
+      
     </div>
+    
   );
 };
 

@@ -20,6 +20,21 @@ export interface IClient {
   updatedAt: Date;
 }
 
+export type ProgramType = 'TB' | 'Malaria' | 'HIV' | 'Diabetes' | 'Maternal' | 'Other' | string; // Allow string for custom types
+
+export interface Program {
+  id: string;
+  name: string;
+  type: ProgramType;
+  description: string;
+  goals: string;
+  startDate: Date;
+  endDate?: Date;
+  status: 'active' | 'completed' | 'planned';
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 export interface IEnrollment {
   _id?: string;
   clientId: string;

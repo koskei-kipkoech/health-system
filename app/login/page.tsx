@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { AuthForm } from "@/components/ui/auth-form";
 import { useAuth } from "@/lib/auth";
+import { BackButton } from "@/components/ui/back-button";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -51,6 +52,7 @@ export default function LoginPage() {
           Sign up
         </Link>
       </p>
+      
     </div>
   );
 }

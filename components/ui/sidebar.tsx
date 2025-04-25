@@ -51,7 +51,7 @@ export default function DoctorSidebar() {
               </a>
             </li>
             <li>
-              <a href="#" className="flex items-center px-4 py-3 hover:bg-slate-700 transition-colors">
+              <a href="/programs/enrollment" className="flex items-center px-4 py-3 hover:bg-slate-700 transition-colors">
                 <ListPlus size={20} />
                 {isOpen && <span className="ml-4">Program Enrollment</span>}
               </a>

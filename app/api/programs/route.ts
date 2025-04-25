@@ -46,8 +46,31 @@ export async function POST(request: NextRequest) {
   }
 }
 
-// Optional: GET route to fetch all programs (implement later if needed)
-// export async function GET() {
+export async function GET() {
+  try {
+    await connectDB();
+    const programs = await Program.find({}).sort({ createdAt: -1 });
+    
+    // Map programs to include only necessary fields
+    const formattedPrograms = programs.map(program => ({
+      _id: program._id,
+      name: program.name,
+      description: program.description,
+      type: program.type,
+      status: program.status,
+      createdAt: program.createdAt,
+      updatedAt: program.updatedAt
+    }));
+
+    return NextResponse.json({ success: true, data: formattedPrograms });
+  } catch (error) {
+    console.error('Error fetching programs:', error);
+    return NextResponse.json(
+      { error: 'Failed to fetch programs' },
+      { status: 500 }
+    );
+  }
+}
 //   await dbConnect();
 //   try {
 //     const programs = await Program.find({});

@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { AuthForm } from "@/components/ui/auth-form";
+import { BackButton } from "@/components/ui/back-button";
 
 export default function SignupPage() {
   const router = useRouter();

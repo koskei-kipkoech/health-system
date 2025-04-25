@@ -3,9 +3,12 @@
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { AuthForm } from "@/components/ui/auth-form";
+import { useAuth } from "@/lib/auth";
+import { BackButton } from "@/components/ui/back-button";
 
 export default function LoginPage() {
   const router = useRouter();
+  const { login } = useAuth();
 
   const handleLogin = async (data: any) => {
     try {
@@ -21,8 +24,13 @@ export default function LoginPage() {
         throw new Error(result.error || 'Login failed');
       }
 
-      // Store token in sessionStorage
+      // Store token and login user
       sessionStorage.setItem('token', result.token);
+      login({
+        name: result.user.name,
+        email: result.user.email,
+        specialization: result.user.specialization
+      });
       
       // Redirect to dashboard after successful login
       router.push('/dashboard');
@@ -44,6 +52,7 @@ export default function LoginPage() {
           Sign up
         </Link>
       </p>
+      
     </div>
   );
 }

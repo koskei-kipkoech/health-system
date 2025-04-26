@@ -1,17 +1,18 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import DoctorSidebar from '@/components/ui/sidebar';
 import { IClient } from '@/types';
 import { Search } from 'lucide-react';
+import ClientModal from '@/components/ui/client-modal';
 
 const ClientsPage = () => {
   const [clients, setClients] = useState<IClient[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [loading, setLoading] = useState(true);
-  const router = useRouter();
+  const [selectedClient, setSelectedClient] = useState<IClient | null>(null);
+  const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     fetchClients();
@@ -34,19 +35,23 @@ const ClientsPage = () => {
 
   const filteredClients = clients.filter(client => {
     // Create full name and ensure all properties exist before calling toLowerCase()
-    const fullName = `${client.firstName || ''} ${client.lastName || ''}`.toLowerCase();
+    const fullName = (client.name || '').toLowerCase();
     const email = client.email?.toLowerCase() || '';
-    const contactNumber = client.contactNumber?.toLowerCase() || '';
+    const phone = client.phone?.toLowerCase() || '';
     
     const searchTermLower = searchTerm.toLowerCase();
     
     return fullName.includes(searchTermLower) ||
            email.includes(searchTermLower) ||
-           contactNumber.includes(searchTermLower);
+           phone.includes(searchTermLower);
   });
 
   const handleViewProfile = (clientId: string) => {
-    router.push(`/clients/${clientId}`);
+    const client = clients.find((c) => c._id === clientId);
+    if (client) {
+      setSelectedClient(client);
+      setModalOpen(true);
+    }
   };
 
   if (loading) {
@@ -95,6 +100,8 @@ const ClientsPage = () => {
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Email</th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Contact</th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Programs</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Registered On</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Last Updated</th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Actions</th>
                   </tr>
                 </thead>
@@ -109,14 +116,14 @@ const ClientsPage = () => {
                     >
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="text-sm font-medium text-gray-900 dark:text-white">
-                          {client.firstName} {client.lastName}
+                          {client.name}
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="text-sm text-gray-500 dark:text-gray-300">{client.email}</div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm text-gray-500 dark:text-gray-300">{client.contactNumber}</div>
+                        <div className="text-sm text-gray-500 dark:text-gray-300">{client.phone}</div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="text-sm text-gray-500 dark:text-gray-300">
@@ -127,6 +134,16 @@ const ClientsPage = () => {
                           ) : (
                             <span className="text-gray-400 dark:text-gray-500">None</span>
                           )}
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="text-sm text-gray-500 dark:text-gray-300">
+                          {client.registrationDate ? new Date(client.registrationDate).toLocaleDateString() : 'Not available'}
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="text-sm text-gray-500 dark:text-gray-300">
+                          {client.registrationDate ? new Date(client.registrationDate).toLocaleDateString() : 'Not available'}
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
@@ -146,6 +163,14 @@ const ClientsPage = () => {
           )}
         </div>
       </div>
+      <ClientModal
+        client={selectedClient}
+        isOpen={modalOpen}
+        onClose={() => {
+          setModalOpen(false);
+          setSelectedClient(null);
+        }}
+      />
     </div>
   );
 };

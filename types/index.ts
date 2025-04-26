@@ -8,14 +8,28 @@ export interface IProgram {
 
 export interface IClient {
   _id?: string;
-  firstName: string;
-  lastName: string;
-  dateOfBirth: Date;
-  gender: 'male' | 'female' | 'other';
-  contactNumber: string;
+  name: string;
   email: string;
-  address: string;
-  enrolledPrograms: string[]; // Array of program IDs
+  phone: string;
+  dateOfBirth: Date;
+  address: {
+    street: string;
+    city: string;
+    state: string;
+    zipCode: string;
+  };
+  medicalHistory: {
+    conditions: string[];
+    allergies: string[];
+    medications: string[];
+    notes: string;
+  };
+  emergencyContact: {
+    name: string;
+    relationship: string;
+    phone: string;
+  };
+  enrolledPrograms: string[];
   createdAt: Date;
   updatedAt: Date;
 }

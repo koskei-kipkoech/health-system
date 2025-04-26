@@ -2,6 +2,7 @@
 
 import React, { useState, FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
+import DashboardLayout from '../../dashboard-layout';
 import { Program, ProgramType } from '@/types'; // Assuming types are correctly exported from @/types
 
 const CreateProgramPage = () => {
@@ -92,6 +93,7 @@ const CreateProgramPage = () => {
   const programTypes: ProgramType[] = ['TB', 'Malaria', 'HIV', 'Diabetes', 'Maternal', 'Other'];
 
   return (
+    <DashboardLayout>
     <div className="min-h-screen bg-gray-100 dark:bg-neutral-900 mt-10 p-8">
       <div className="max-w-2xl mx-auto bg-white dark:bg-neutral-800 rounded-lg shadow-md p-6">
         <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Create New Health Program</h1>
@@ -227,6 +229,7 @@ const CreateProgramPage = () => {
         </form>
       </div>
     </div>
+    </DashboardLayout>
   );
 };
 

@@ -58,11 +58,11 @@ const DashboardPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-black/20 dark:to-black">
+    <div className="flex h-screen bg-gray-50 dark:bg-gray-900">
       <div className="flex h-screen">
         <DoctorSidebar />
         
-        <div className="flex-1 mt-15 p-8 overflow-y-auto">
+        <div className="flex-1 mt-20 p-8 overflow-y-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -82,8 +82,9 @@ const DashboardPage = () => {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
+              whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6"
+              className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 transform transition-all duration-300 hover:shadow-xl"
             >
               <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">Clients</h2>
               <p className="text-gray-600 dark:text-gray-300 mb-6">
@@ -91,7 +92,7 @@ const DashboardPage = () => {
               </p>
               <Link 
                 href="/clients" 
-                className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg transform transition-all duration-300 hover:bg-blue-700 hover:scale-105 hover:shadow-md active:scale-95"
               >
                 View All Clients
               </Link>
@@ -101,8 +102,9 @@ const DashboardPage = () => {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
+              whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6"
+              className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 transform transition-all duration-300 hover:shadow-xl"
             >
               <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">Programs</h2>
               <p className="text-gray-600 dark:text-gray-300 mb-6">
@@ -110,7 +112,7 @@ const DashboardPage = () => {
               </p>
               <Link 
                 href="/programs/create" 
-                className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg transform transition-all duration-300 hover:bg-blue-700 hover:scale-105 hover:shadow-md active:scale-95"
               >
                 Manage Programs
               </Link>

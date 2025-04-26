@@ -30,6 +30,7 @@ export interface IClient {
     phone: string;
   };
   enrolledPrograms: string[];
+  registrationDate: Date;
   createdAt: Date;
   updatedAt: Date;
 }

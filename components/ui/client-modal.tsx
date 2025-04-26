@@ -136,7 +136,7 @@ const ClientModal: React.FC<ClientModalProps> = ({ client, isOpen, onClose }) =>
                     <div>
                       <label className="text-sm font-medium text-gray-500 dark:text-gray-400">Registered On</label>
                       <p className="text-gray-900 dark:text-white">
-                        {client.createdAt ? new Date(client.createdAt).toLocaleDateString('en-US', {
+                        {client.registrationDate ? new Date(client.registrationDate).toLocaleDateString('en-US', {
                           year: 'numeric',
                           month: 'long',
                           day: 'numeric',
@@ -153,7 +153,8 @@ const ClientModal: React.FC<ClientModalProps> = ({ client, isOpen, onClose }) =>
                           month: 'long',
                           day: 'numeric',
                           hour: '2-digit',
-                          minute: '2-digit'
+                          minute: '2-digit',
+                          timeZone: 'UTC'
                         }) : 'Not available'}
                       </p>
                     </div>

@@ -18,7 +18,7 @@ export default function DashboardLayout({
         <DoctorSidebar />
         <main className="flex-grow p-6">{children}</main>
       </div>
-      <Footer />
+      
     </AuthProvider>
   );
 }

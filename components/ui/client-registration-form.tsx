@@ -3,7 +3,6 @@
 import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { BackButton } from "./back-button";
 import { useRouter } from 'next/navigation';
 import { ProgramSelection } from "./program-selection";
 
@@ -48,7 +47,6 @@ export function ClientRegistrationForm({ onSubmit }: { onSubmit: (data: ClientFo
 
   return (
     <>
-      <BackButton />
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

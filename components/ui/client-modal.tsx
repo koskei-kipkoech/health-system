@@ -1,9 +1,14 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 import { IClient } from '@/types';
+
+interface Program {
+  _id: string;
+  name: string;
+}
 
 interface ClientModalProps {
   client: IClient | null;
@@ -12,6 +17,29 @@ interface ClientModalProps {
 }
 
 const ClientModal: React.FC<ClientModalProps> = ({ client, isOpen, onClose }) => {
+  const [programs, setPrograms] = useState<Program[]>([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (isOpen && client?.enrolledPrograms && client.enrolledPrograms.length > 0) {
+      fetchProgramDetails();
+    }
+  }, [isOpen, client]);
+
+  const fetchProgramDetails = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch('/api/programs');
+      if (!response.ok) throw new Error('Failed to fetch programs');
+      const data = await response.json();
+      setPrograms(data.data || []);
+    } catch (error) {
+      console.error('Error fetching programs:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   if (!client) return null;
 
   return (
@@ -113,16 +141,25 @@ const ClientModal: React.FC<ClientModalProps> = ({ client, isOpen, onClose }) =>
 
                   <div>
                     <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Enrolled Programs</h2>
-                    {client.enrolledPrograms.length > 0 ? (
+                    {client.enrolledPrograms && client.enrolledPrograms.length > 0 ? (
                       <div className="space-y-3">
-                        {client.enrolledPrograms.map((program, index) => (
-                          <div
-                            key={index}
-                            className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg"
-                          >
-                            <h3 className="font-medium text-gray-900 dark:text-white">{program}</h3>
-                          </div>
-                        ))}
+                        {loading ? (
+                          <p className="text-gray-500 dark:text-gray-400">Loading programs...</p>
+                        ) : (
+                          client.enrolledPrograms.map((programId) => {
+                            const program = programs.find(p => p._id === programId);
+                            return (
+                              <div
+                                key={programId}
+                                className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg"
+                              >
+                                <h3 className="font-medium text-gray-900 dark:text-white">
+                                  {program ? program.name : 'Loading...'}
+                                </h3>
+                              </div>
+                            );
+                          })
+                        )}
                       </div>
                     ) : (
                       <p className="text-gray-500 dark:text-gray-400">No programs enrolled</p>

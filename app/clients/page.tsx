@@ -101,7 +101,7 @@ const ClientsPage = () => {
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Contact</th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Programs</th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Registered On</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Last Updated</th>
+                    {/* <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Last Updated</th> */}
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Actions</th>
                   </tr>
                 </thead>
@@ -141,17 +141,18 @@ const ClientsPage = () => {
                           {client.registrationDate ? new Date(client.registrationDate).toLocaleDateString() : 'Not available'}
                         </div>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
+                      {/* <td className="px-6 py-4 whitespace-nowrap">
                         <div className="text-sm text-gray-500 dark:text-gray-300">
                           {client.registrationDate ? new Date(client.registrationDate).toLocaleDateString() : 'Not available'}
                         </div>
-                      </td>
+                      </td> */}
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                         <button
                           onClick={() => handleViewProfile(client._id!)}
-                          className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300 font-medium"
+                          className="text-blue-400 hover:text-blue-900 dark:text-blue-400 cursor-pointer dark:hover:text-blue-300 font-medium px-4 py-2 rounded-md transition-all duration-300 hover:scale-105 hover:shadow-lg relative group"
                         >
-                          View Profile
+                          <span className="relative z-10">View Profile</span>
+                          <div className="absolute inset-0 bg-blue-50 dark:bg-blue-900/20 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                         </button>
                       </td>
                     </motion.tr>

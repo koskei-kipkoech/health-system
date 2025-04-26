@@ -42,7 +42,11 @@ const clientSchema = new mongoose.Schema({
   registrationDate: {
     type: Date,
     default: Date.now
-  }
+  },
+  enrolledPrograms: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Program'
+  }]
 });
 
 export const Client = mongoose.models.Client || mongoose.model('Client', clientSchema);

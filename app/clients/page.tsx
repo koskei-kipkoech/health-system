@@ -1,17 +1,18 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import DoctorSidebar from '@/components/ui/sidebar';
 import { IClient } from '@/types';
 import { Search } from 'lucide-react';
+import ClientModal from '@/components/ui/client-modal';
 
 const ClientsPage = () => {
   const [clients, setClients] = useState<IClient[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [loading, setLoading] = useState(true);
-  const router = useRouter();
+  const [selectedClient, setSelectedClient] = useState<IClient | null>(null);
+  const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     fetchClients();
@@ -46,7 +47,11 @@ const ClientsPage = () => {
   });
 
   const handleViewProfile = (clientId: string) => {
-    router.push(`/clients/${clientId}`);
+    const client = clients.find((c) => c._id === clientId);
+    if (client) {
+      setSelectedClient(client);
+      setModalOpen(true);
+    }
   };
 
   if (loading) {
@@ -146,6 +151,14 @@ const ClientsPage = () => {
           )}
         </div>
       </div>
+      <ClientModal
+        client={selectedClient}
+        isOpen={modalOpen}
+        onClose={() => {
+          setModalOpen(false);
+          setSelectedClient(null);
+        }}
+      />
     </div>
   );
 };

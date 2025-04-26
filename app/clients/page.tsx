@@ -61,7 +61,7 @@ const ClientsPage = () => {
   return (
     <div className="flex h-screen bg-gray-50 dark:bg-gray-900">
       <DoctorSidebar />
-      <div className="flex-1 p-8 overflow-auto">
+      <div className="flex-1 mt-15 p-8 overflow-auto">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

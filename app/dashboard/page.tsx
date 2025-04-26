@@ -62,7 +62,7 @@ const DashboardPage = () => {
       <div className="flex h-screen">
         <DoctorSidebar />
         
-        <div className="flex-1 p-8 overflow-y-auto">
+        <div className="flex-1 mt-15 p-8 overflow-y-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

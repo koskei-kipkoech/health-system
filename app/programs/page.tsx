@@ -4,10 +4,13 @@ import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { Program } from '@/types';
 import { ProgramCard } from '@/components/ui/program-card';
+import { ProgramModal } from '@/components/ui/program-modal';
 
 export default function ProgramsPage() {
   const [programs, setPrograms] = useState<Program[]>([]);
   const [loading, setLoading] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedProgram, setSelectedProgram] = useState<Program | undefined>();
 
   useEffect(() => {
     fetchPrograms();
@@ -27,28 +30,38 @@ export default function ProgramsPage() {
     }
   };
 
-  const handleEdit = async (program: Program) => {
+  const handleEdit = (program: Program) => {
+    setSelectedProgram(program);
+    setIsModalOpen(true);
+  };
+
+  const handleCreate = () => {
+    setSelectedProgram(undefined);
+    setIsModalOpen(true);
+  };
+
+  const handleSubmit = async (program: Program) => {
     const programId = program?._id || program?.id;
-    if (!programId) {
-      console.error('Invalid program ID');
-      return;
-    }
+    const isNewProgram = !programId;
 
     try {
-      const response = await fetch(`/api/programs/${programId}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(program),
-      });
+      const response = await fetch(
+        isNewProgram ? '/api/programs' : `/api/programs/${programId}`,
+        {
+          method: isNewProgram ? 'POST' : 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(program),
+        }
+      );
 
-      if (!response.ok) throw new Error('Failed to update program');
+      if (!response.ok) throw new Error(`Failed to ${isNewProgram ? 'create' : 'update'} program`);
       
       // Refresh programs list
       fetchPrograms();
     } catch (error) {
-      console.error('Error updating program:', error);
+      console.error(`Error ${isNewProgram ? 'creating' : 'updating'} program:`, error);
     }
   };
 
@@ -86,9 +99,15 @@ export default function ProgramsPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="mb-8"
+            className="mb-8 flex justify-between items-center"
           >
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Programs Overview</h1>
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Programs Overview</h1>
+            <button
+              onClick={handleCreate}
+              className="px-4 py-2 text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
+            >
+              Add New Program
+            </button>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -109,6 +128,12 @@ export default function ProgramsPage() {
           )}
         </div>
       </div>
+      <ProgramModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onSubmit={handleSubmit}
+        program={selectedProgram}
+      />
     </div>
   );
 }

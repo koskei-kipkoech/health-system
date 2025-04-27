@@ -14,9 +14,9 @@ export default function DashboardLayout({
   return (
     <AuthProvider>
       <Navbar />
-      <div className="flex">
-        <DoctorSidebar />
-        <main className="flex-grow p-6">{children}</main>
+      <div className="flex h-screen bg-gray-50 dark:bg-gray-900 ">
+        <DoctorSidebar  />
+        <main className="flex-1 p-8 overflow-auto">{children}</main>
       </div>
       
     </AuthProvider>

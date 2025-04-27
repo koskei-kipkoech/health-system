@@ -40,7 +40,7 @@ export function ProgramCard({ program, onEdit, onDelete }: ProgramCardProps) {
             )}
             {onDelete && (
               <button
-                onClick={() => onDelete(program.id)}
+                onClick={() => onDelete(program._id || program.id)}
                 className="p-2 text-neutral-600 dark:text-neutral-400 hover:text-red-600 dark:hover:text-red-400 transition-colors"
                 aria-label="Delete program"
               >

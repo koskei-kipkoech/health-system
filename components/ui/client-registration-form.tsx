@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { useRouter } from 'next/navigation';
 import { ProgramSelection } from "./program-selection";
+// import DoctorSidebar from "./sidebar";
 
 interface ClientFormData {
   name: string;
@@ -46,12 +47,14 @@ export function ClientRegistrationForm({ onSubmit }: { onSubmit: (data: ClientFo
   };
 
   return (
-    <>
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="flex-grow w-full max-w-4xl mx-auto p-8 bg-gradient-to-br from-white to-white/80 dark:from-neutral-900 dark:to-neutral-900/90 rounded-3xl shadow-2xl mt-20 max-h-[85vh] overflow-y-auto transition-all duration-300 hover:shadow-3xl backdrop-blur-lg border border-white/20 dark:border-neutral-800/30"
-      >
+    <div className="flex h-screen bg-gray-50 dark:bg-gray-900">
+      <div className="flex-1 p-8 overflow-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="max-w-4xl mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden p-8 mt-20"
+        >
+        
         <h2 className="text-3xl font-bold text-center mb-8  dark:text-white bg-gradient-to-r from-primary-500 to-primary-700 bg-clip-text text-transparent">
           Client Registration
         </h2>
@@ -90,7 +93,7 @@ export function ClientRegistrationForm({ onSubmit }: { onSubmit: (data: ClientFo
                     },
                   })}
                   type="email"
-                  className="mt-1 block w-full px-3 py-2 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
+                  className="mt-1 block w-full px-4 py-3 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-lg shadow-sm transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent hover:border-primary-400 dark:hover:border-primary-600"
                 />
                 {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>}
               </div>
@@ -101,7 +104,7 @@ export function ClientRegistrationForm({ onSubmit }: { onSubmit: (data: ClientFo
                 <input
                   {...register("phone", { required: "Phone number is required" })}
                   type="tel"
-                  className="mt-1 block w-full px-3 py-2 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
+                  className="mt-1 block w-full px-4 py-3 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-lg shadow-sm transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent hover:border-primary-400 dark:hover:border-primary-600"
                 />
                 {errors.phone && <p className="mt-1 text-sm text-red-600">{errors.phone.message}</p>}
               </div>
@@ -112,7 +115,7 @@ export function ClientRegistrationForm({ onSubmit }: { onSubmit: (data: ClientFo
                 <input
                   {...register("dateOfBirth", { required: "Date of birth is required" })}
                   type="date"
-                  className="mt-1 block w-full px-3 py-2 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
+                  className="mt-1 block w-full px-4 py-3 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-lg shadow-sm transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent hover:border-primary-400 dark:hover:border-primary-600"
                 />
                 {errors.dateOfBirth && <p className="mt-1 text-sm text-red-600">{errors.dateOfBirth.message}</p>}
               </div>
@@ -130,7 +133,7 @@ export function ClientRegistrationForm({ onSubmit }: { onSubmit: (data: ClientFo
                 <input
                   {...register("address.street", { required: "Street address is required" })}
                   type="text"
-                  className="mt-1 block w-full px-3 py-2 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
+                  className="mt-1 block w-full px-4 py-3 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-lg shadow-sm transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent hover:border-primary-400 dark:hover:border-primary-600"
                 />
                 {errors.address?.street && <p className="mt-1 text-sm text-red-600">{errors.address.street.message}</p>}
               </div>
@@ -142,7 +145,7 @@ export function ClientRegistrationForm({ onSubmit }: { onSubmit: (data: ClientFo
                   <input
                     {...register("address.city", { required: "City is required" })}
                     type="text"
-                    className="mt-1 block w-full px-3 py-2 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
+                    className="mt-1 block w-full px-4 py-3 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-lg shadow-sm transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent hover:border-primary-400 dark:hover:border-primary-600"
                   />
                   {errors.address?.city && <p className="mt-1 text-sm text-red-600">{errors.address.city.message}</p>}
                 </div>
@@ -153,7 +156,7 @@ export function ClientRegistrationForm({ onSubmit }: { onSubmit: (data: ClientFo
                   <input
                     {...register("address.state", { required: "State is required" })}
                     type="text"
-                    className="mt-1 block w-full px-3 py-2 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
+                    className="mt-1 block w-full px-4 py-3 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-lg shadow-sm transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent hover:border-primary-400 dark:hover:border-primary-600"
                   />
                   {errors.address?.state && <p className="mt-1 text-sm text-red-600">{errors.address.state.message}</p>}
                 </div>
@@ -165,7 +168,7 @@ export function ClientRegistrationForm({ onSubmit }: { onSubmit: (data: ClientFo
                 <input
                   {...register("address.zipCode", { required: "ZIP code is required" })}
                   type="text"
-                  className="mt-1 block w-full px-3 py-2 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
+                  className="mt-1 block w-full px-4 py-3 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-lg shadow-sm transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent hover:border-primary-400 dark:hover:border-primary-600"
                 />
                 {errors.address?.zipCode && <p className="mt-1 text-sm text-red-600">{errors.address.zipCode.message}</p>}
               </div>
@@ -183,7 +186,7 @@ export function ClientRegistrationForm({ onSubmit }: { onSubmit: (data: ClientFo
                 <input
                   {...register("emergencyContact.name", { required: "Emergency contact name is required" })}
                   type="text"
-                  className="mt-1 block w-full px-3 py-2 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
+                  className="mt-1 block w-full px-4 py-3 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-lg shadow-sm transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent hover:border-primary-400 dark:hover:border-primary-600"
                 />
                 {errors.emergencyContact?.name && <p className="mt-1 text-sm text-red-600">{errors.emergencyContact.name.message}</p>}
               </div>
@@ -194,7 +197,7 @@ export function ClientRegistrationForm({ onSubmit }: { onSubmit: (data: ClientFo
                 <input
                   {...register("emergencyContact.relationship", { required: "Relationship is required" })}
                   type="text"
-                  className="mt-1 block w-full px-3 py-2 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
+                  className="mt-1 block w-full px-4 py-3 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-lg shadow-sm transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent hover:border-primary-400 dark:hover:border-primary-600"
                 />
                 {errors.emergencyContact?.relationship && <p className="mt-1 text-sm text-red-600">{errors.emergencyContact.relationship.message}</p>}
               </div>
@@ -205,7 +208,7 @@ export function ClientRegistrationForm({ onSubmit }: { onSubmit: (data: ClientFo
                 <input
                   {...register("emergencyContact.phone", { required: "Emergency contact phone is required" })}
                   type="tel"
-                  className="mt-1 block w-full px-3 py-2 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
+                  className="mt-1 block w-full px-4 py-3 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-lg shadow-sm transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent hover:border-primary-400 dark:hover:border-primary-600"
                 />
                 {errors.emergencyContact?.phone && <p className="mt-1 text-sm text-red-600">{errors.emergencyContact.phone.message}</p>}
               </div>
@@ -220,13 +223,14 @@ export function ClientRegistrationForm({ onSubmit }: { onSubmit: (data: ClientFo
           <div className="mt-8">
             <Button
               type="submit"
-              className="w-full bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white font-semibold py-3 px-6 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-200 focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-900"
+              className="w-full bg-amber-600 text-white px-6 py-3 rounded-lg hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 disabled:opacity-50 transition-colors duration-200 text-sm font-medium shadow-sm transform hover:scale-105 hover:shadow-md active:scale-95"
             >
               Register Client
             </Button>
           </div>
         </form>
       </motion.div>
-    </>
+      </div>
+    </div>
   );
 }

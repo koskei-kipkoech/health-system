@@ -28,11 +28,36 @@ export default function ProgramsPage() {
   };
 
   const handleEdit = async (program: Program) => {
-    // TODO: Implement edit functionality
-    console.log('Edit program:', program);
+    const programId = program?._id || program?.id;
+    if (!programId) {
+      console.error('Invalid program ID');
+      return;
+    }
+
+    try {
+      const response = await fetch(`/api/programs/${programId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(program),
+      });
+
+      if (!response.ok) throw new Error('Failed to update program');
+      
+      // Refresh programs list
+      fetchPrograms();
+    } catch (error) {
+      console.error('Error updating program:', error);
+    }
   };
 
   const handleDelete = async (programId: string) => {
+    if (!programId) {
+      console.error('Invalid program ID');
+      return;
+    }
+
     if (!confirm('Are you sure you want to delete this program?')) return;
 
     try {
@@ -69,7 +94,7 @@ export default function ProgramsPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {programs.map((program) => (
               <ProgramCard
-                key={program.id}
+                key={program._id || program.id}
                 program={program}
                 onEdit={handleEdit}
                 onDelete={handleDelete}

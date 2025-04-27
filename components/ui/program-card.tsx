@@ -21,7 +21,7 @@ export function ProgramCard({ program, onEdit, onDelete }: ProgramCardProps) {
       <div className="p-6">
         <div className="flex justify-between items-start mb-4">
           <div>
-            <h3 className="text-xl font-semibold text-neutral-900 dark:text-white mb-2">
+            <h3 className="text-2xl font-bold text-neutral-900 dark:text-white mb-2">
               {program.name}
             </h3>
             <span className="inline-block px-2 py-1 text-sm rounded-full bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 mb-3">
@@ -50,14 +50,18 @@ export function ProgramCard({ program, onEdit, onDelete }: ProgramCardProps) {
           </div>
         </div>
 
-        <p className="text-neutral-600 dark:text-neutral-300 mb-4">
+        <p className="text-neutral-600 dark:text-neutral-300 mb-6 text-base leading-relaxed">
           {program.description}
         </p>
 
         <div className="space-y-2">
           <div>
             <p className="text-sm font-medium text-neutral-500 dark:text-neutral-400">Goals</p>
-            <p className="text-neutral-800 dark:text-neutral-200">{program.goals}</p>
+            <div className="bg-neutral-50 dark:bg-neutral-700 p-3 rounded-lg">
+              <p className="text-neutral-800 dark:text-neutral-200 whitespace-pre-line">
+                {program.goals || 'No goals specified'}
+              </p>
+            </div>
           </div>
           <div>
             <p className="text-sm font-medium text-neutral-500 dark:text-neutral-400">Status</p>
@@ -71,10 +75,29 @@ export function ProgramCard({ program, onEdit, onDelete }: ProgramCardProps) {
           </div>
           <div>
             <p className="text-sm font-medium text-neutral-500 dark:text-neutral-400">Duration</p>
-            <p className="text-neutral-800 dark:text-neutral-200">
-              {new Date(program.startDate).toLocaleDateString()} - 
-              {program.endDate ? new Date(program.endDate).toLocaleDateString() : 'Ongoing'}
-            </p>
+            <div className="flex items-center gap-2 text-neutral-800 dark:text-neutral-200">
+              <div className="flex flex-col">
+                <span className="font-medium">
+                  {program.startDate
+                    ? new Date(program.startDate).toLocaleDateString(undefined, {
+                        year: 'numeric',
+                        month: 'short',
+                        day: 'numeric'
+                      })
+                    : 'Not specified'}
+                </span>
+                <span className="text-neutral-500 dark:text-neutral-400 text-xs">to</span>
+                <span className="font-medium">
+                  {program.endDate
+                    ? new Date(program.endDate).toLocaleDateString(undefined, {
+                        year: 'numeric',
+                        month: 'short',
+                        day: 'numeric'
+                      })
+                    : 'Ongoing'}
+                </span>
+              </div>
+            </div>
           </div>
         </div>
       </div>

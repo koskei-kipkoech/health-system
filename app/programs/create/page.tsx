@@ -4,6 +4,7 @@ import React, { useState, FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import DashboardLayout from '../../dashboard-layout';
 import { Program, ProgramType } from '@/types'; // Assuming types are correctly exported from @/types
+import DoctorSidebar from '@/components/ui/sidebar';
 
 const CreateProgramPage = () => {
   const router = useRouter();
@@ -93,13 +94,17 @@ const CreateProgramPage = () => {
   const programTypes: ProgramType[] = ['TB', 'Malaria', 'HIV', 'Diabetes', 'Maternal', 'Other'];
 
   return (
-    <DashboardLayout>
-    <div className="min-h-screen bg-gray-100 dark:bg-neutral-900 mt-10 p-8">
-      <div className="max-w-2xl mx-auto bg-white dark:bg-neutral-800 rounded-lg shadow-md p-6">
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Create New Health Program</h1>
+    
+    <div className="flex h-screen bg-gray-50 dark:bg-gray-900">
+      <DoctorSidebar/>
+      <div className="flex-1 p-8 overflow-auto">
+        <div className="max-w-4xl mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden p-8 mt-20">
+
+
+        <h1 className="text-3xl font-bold text-center mb-8 dark:text-white bg-gradient-to-r from-primary-500 to-primary-700 bg-clip-text text-transparent">Create New Health Program</h1>
         
         {error && (
-          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+          <div className="bg-red-100/90 dark:bg-red-900/20 border border-red-400 dark:border-red-800 text-red-700 dark:text-red-400 px-4 py-3 rounded-xl backdrop-blur-sm relative mb-4" role="alert">
             <span className="block sm:inline">{error}</span>
           </div>
         )}
@@ -114,7 +119,7 @@ const CreateProgramPage = () => {
               value={programData.name}
               onChange={handleChange}
               required
-              className="mt-1 block w-full px-3 py-2 bg-white dark:bg-neutral-700 border border-gray-300 dark:border-neutral-600 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-gray-900 dark:text-white"
+              className="mt-1 block w-full px-4 py-3 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-lg shadow-sm transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent hover:border-primary-400 dark:hover:border-primary-600 text-gray-900 dark:text-white"
             />
           </div>
 
@@ -126,7 +131,7 @@ const CreateProgramPage = () => {
               value={programData.type === 'Other' || !programTypes.includes(programData.type as ProgramType) ? 'Other' : programData.type}
               onChange={handleTypeChange}
               required
-              className="mt-1 block w-full px-3 py-2 bg-white dark:bg-neutral-700 border border-gray-300 dark:border-neutral-600 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-gray-900 dark:text-white"
+              className="mt-1 block w-full px-4 py-3 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-lg shadow-sm transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent hover:border-primary-400 dark:hover:border-primary-600 text-gray-900 dark:text-white"
             >
               {programTypes.map(type => (
                 <option key={type} value={type}>{type}</option>
@@ -144,7 +149,7 @@ const CreateProgramPage = () => {
                 value={customType}
                 onChange={handleCustomTypeChange}
                 required
-                className="mt-1 block w-full px-3 py-2 bg-white dark:bg-neutral-700 border border-gray-300 dark:border-neutral-600 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-gray-900 dark:text-white"
+                className="mt-1 block w-full px-4 py-3 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-lg shadow-sm transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent hover:border-primary-400 dark:hover:border-primary-600 text-gray-900 dark:text-white"
               />
             </div>
           )}
@@ -158,7 +163,7 @@ const CreateProgramPage = () => {
               value={programData.description}
               onChange={handleChange}
               required
-              className="mt-1 block w-full px-3 py-2 bg-white dark:bg-neutral-700 border border-gray-300 dark:border-neutral-600 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-gray-900 dark:text-white"
+              className="mt-1 block w-full px-4 py-3 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-lg shadow-sm transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent hover:border-primary-400 dark:hover:border-primary-600 text-gray-900 dark:text-white"
             ></textarea>
           </div>
 
@@ -171,7 +176,7 @@ const CreateProgramPage = () => {
               value={programData.goals}
               onChange={handleChange}
               required
-              className="mt-1 block w-full px-3 py-2 bg-white dark:bg-neutral-700 border border-gray-300 dark:border-neutral-600 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-gray-900 dark:text-white"
+              className="mt-1 block w-full px-4 py-3 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-lg shadow-sm transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent hover:border-primary-400 dark:hover:border-primary-600 text-gray-900 dark:text-white"
             ></textarea>
           </div>
 
@@ -185,7 +190,7 @@ const CreateProgramPage = () => {
                 value={programData.startDate ? (programData.startDate instanceof Date ? programData.startDate.toISOString().split('T')[0] : programData.startDate) : ''}
                 onChange={handleDateChange}
                 required
-                className="mt-1 block w-full px-3 py-2 bg-white dark:bg-neutral-700 border border-gray-300 dark:border-neutral-600 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-gray-900 dark:text-white"
+                className="mt-1 block w-full px-4 py-3 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-lg shadow-sm transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent hover:border-primary-400 dark:hover:border-primary-600 text-gray-900 dark:text-white"
               />
             </div>
             <div>
@@ -196,7 +201,7 @@ const CreateProgramPage = () => {
                 name="endDate"
                 value={programData.endDate ? (programData.endDate instanceof Date ? programData.endDate.toISOString().split('T')[0] : programData.endDate) : ''}
                 onChange={handleDateChange}
-                className="mt-1 block w-full px-3 py-2 bg-white dark:bg-neutral-700 border border-gray-300 dark:border-neutral-600 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-gray-900 dark:text-white"
+                className="mt-1 block w-full px-4 py-3 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-lg shadow-sm transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent hover:border-primary-400 dark:hover:border-primary-600 text-gray-900 dark:text-white"
               />
             </div>
           </div>
@@ -209,7 +214,7 @@ const CreateProgramPage = () => {
               value={programData.status}
               onChange={handleChange}
               required
-              className="mt-1 block w-full px-3 py-2 bg-white dark:bg-neutral-700 border border-gray-300 dark:border-neutral-600 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-gray-900 dark:text-white"
+              className="mt-1 block w-full px-4 py-3 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 rounded-lg shadow-sm transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent hover:border-primary-400 dark:hover:border-primary-600 text-gray-900 dark:text-white"
             >
               <option value="planned">Planned</option>
               <option value="active">Active</option>
@@ -221,15 +226,15 @@ const CreateProgramPage = () => {
             <button
               type="submit"
               disabled={isLoading}
-              className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white ${isLoading ? 'bg-indigo-400' : 'bg-indigo-600 hover:bg-indigo-700'} focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50`}
+              className="bg-amber-600 text-white px-6 py-3 rounded-lg hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 disabled:opacity-50 transition-colors duration-200 text-sm font-medium shadow-sm w-full transform hover:scale-105 hover:shadow-md active:scale-95"
             >
               {isLoading ? 'Creating...' : 'Create Program'}
             </button>
           </div>
         </form>
+        </div>
       </div>
     </div>
-    </DashboardLayout>
   );
 };
 

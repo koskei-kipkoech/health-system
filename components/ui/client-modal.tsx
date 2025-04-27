@@ -57,7 +57,7 @@ const ClientModal: React.FC<ClientModalProps> = ({ client, isOpen, onClose }) =>
             transition={{ duration: 0.2 }}
             className="fixed inset-0 z-50 flex items-center justify-center overflow-auto p-4"
           >
-            <div className="relative bg-white dark:bg-gray-800 rounded-lg shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-auto backdrop-blur-sm ring-1 ring-black/5">
+            <div className="relative bg-white dark:bg-gray-800 rounded-lg shadow-2xl w-full max-w-4xl max-h-[75vh] overflow-auto backdrop-blur-sm ring-1 ring-black/5">
               <button
                 onClick={onClose}
                 className="absolute right-4 top-4 p-2 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-200 ease-in-out"

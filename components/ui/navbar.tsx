@@ -16,7 +16,7 @@ const privateNavItems = [
   { name: 'Home', href: '/' },
   { name: 'Dashboard', href: '/dashboard' },
   { name: 'Programs', href: '/programs' },
-  { name: 'Clients', href: '/clients' },
+  { name: 'Clients', href: '/info' },
 ]
 
 export function Navbar() {

@@ -2,6 +2,7 @@
 
 import { ClientRegistrationForm } from '@/components/ui/client-registration-form';
 import type { ClientFormData } from '@/components/ui/client-form';
+import DashboardLayout from '../../dashboard-layout';
 
 export default function RegisterClientPage() {
   const handleSubmit = async (data: ClientFormData) => {
@@ -26,8 +27,10 @@ export default function RegisterClientPage() {
   };
 
   return (
-    <div className="container mx-auto py-8">
-      <ClientRegistrationForm onSubmit={handleSubmit} />
-    </div>
+    <DashboardLayout>
+      <div className="container mx-auto py-8">
+        <ClientRegistrationForm onSubmit={handleSubmit} />
+      </div>
+    </DashboardLayout>
   );
 }

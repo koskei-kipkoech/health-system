@@ -47,7 +47,7 @@ const ClientModal: React.FC<ClientModalProps> = ({ client, isOpen, onClose }) =>
       {isOpen && (
         <>
           <div
-            className="fixed mt-8 inset-0 bg-black bg-opacity-50 z-40"
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 transition-all duration-300 ease-in-out"
             onClick={onClose}
           />
           <motion.div
@@ -57,12 +57,12 @@ const ClientModal: React.FC<ClientModalProps> = ({ client, isOpen, onClose }) =>
             transition={{ duration: 0.2 }}
             className="fixed inset-0 z-50 flex items-center justify-center overflow-auto p-4"
           >
-            <div className="relative bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full max-w-4xl max-h-[90vh] overflow-auto">
+            <div className="relative bg-white dark:bg-gray-800 rounded-lg shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-auto backdrop-blur-sm ring-1 ring-black/5">
               <button
                 onClick={onClose}
-                className="absolute right-4 top-4 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+                className="absolute right-4 top-4 p-2 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-200 ease-in-out"
               >
-                <X className="h-6 w-6" />
+                <X className="h-5 w-5" />
               </button>
 
               <div className="p-6">
@@ -105,25 +105,25 @@ const ClientModal: React.FC<ClientModalProps> = ({ client, isOpen, onClose }) =>
                           )}
                         </p>
                       </div>
-                      <div>
-                        <label className="text-sm font-medium text-gray-500 dark:text-gray-400">Medical History</label>
-                        <div className="mt-2 space-y-2">
-                          <div>
-                            <h4 className="text-sm font-medium text-gray-600 dark:text-gray-300">Conditions:</h4>
-                            <p className="text-gray-900 dark:text-white">{client.medicalHistory.conditions.join(', ') || 'None'}</p>
+                      <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm border border-gray-100 dark:border-gray-700">
+                        <label className="text-lg font-semibold text-gray-900 dark:text-white mb-4 block">Medical History</label>
+                        <div className="space-y-4">
+                          <div className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-4">
+                            <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Conditions:</h4>
+                            <p className="text-gray-900 dark:text-white text-base">{client.medicalHistory.conditions.join(', ') || 'None'}</p>
                           </div>
-                          <div>
-                            <h4 className="text-sm font-medium text-gray-600 dark:text-gray-300">Allergies:</h4>
-                            <p className="text-gray-900 dark:text-white">{client.medicalHistory.allergies.join(', ') || 'None'}</p>
+                          <div className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-4">
+                            <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Allergies:</h4>
+                            <p className="text-gray-900 dark:text-white text-base">{client.medicalHistory.allergies.join(', ') || 'None'}</p>
                           </div>
-                          <div>
-                            <h4 className="text-sm font-medium text-gray-600 dark:text-gray-300">Medications:</h4>
-                            <p className="text-gray-900 dark:text-white">{client.medicalHistory.medications.join(', ') || 'None'}</p>
+                          <div className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-4">
+                            <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Medications:</h4>
+                            <p className="text-gray-900 dark:text-white text-base">{client.medicalHistory.medications.join(', ') || 'None'}</p>
                           </div>
                           {client.medicalHistory.notes && (
-                            <div>
-                              <h4 className="text-sm font-medium text-gray-600 dark:text-gray-300">Notes:</h4>
-                              <p className="text-gray-900 dark:text-white">{client.medicalHistory.notes}</p>
+                            <div className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-4">
+                              <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Notes:</h4>
+                              <p className="text-gray-900 dark:text-white text-base">{client.medicalHistory.notes}</p>
                             </div>
                           )}
                         </div>

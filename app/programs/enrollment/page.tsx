@@ -65,31 +65,31 @@ export default function ProgramEnrollment() {
   };
 
   return (
-    <div className="flex h-screen bg-slate-50">
+    <div className="flex h-screen bg-gray-900">
       <DoctorSidebar />
-      <div className="flex-1 p-8">
-        <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-sm p-6">
-          <h1 className="text-2xl font-bold text-slate-800 mb-6">Program Enrollment</h1>
+      <div className="flex-1 mt-15 p-8">
+        <div className="max-w-4xl mx-auto bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">Program Enrollment</h1>
           
           {error && (
-            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+            <div className="bg-red-100 dark:bg-red-900/50 border border-red-400 dark:border-red-800 text-red-700 dark:text-red-200 px-4 py-3 rounded-lg mb-6">
               {error}
             </div>
           )}
 
-          <div className="space-y-6">
+          <div className="space-y-8">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
                 Select Client
               </label>
               <select
                 value={selectedClient}
                 onChange={(e) => setSelectedClient(e.target.value)}
-                className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm rounded-md"
+                className="mt-1 block w-full pl-4 pr-10 py-3 text-base border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 sm:text-sm rounded-lg transition-colors duration-200"
               >
-                <option value="">Choose a client</option>
+                <option className='text-gray-500 dark:text-gray-400' value="">Choose a client</option>
                 {clients.map((client: any) => (
-                  <option key={client._id} value={client._id}>
+                  <option key={client._id} value={client._id} className="text-gray-900 dark:text-white">
                     {client.name}
                   </option>
                 ))}
@@ -97,7 +97,7 @@ export default function ProgramEnrollment() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
                 Select Programs
               </label>
               <ProgramSelection
@@ -106,11 +106,11 @@ export default function ProgramEnrollment() {
               />
             </div>
 
-            <div className="flex justify-end mt-6">
+            <div className="flex justify-end mt-8">
               <button
                 onClick={handleEnrollment}
                 disabled={loading}
-                className="bg-amber-600 text-white px-4 py-2 rounded-md hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 disabled:opacity-50"
+                className="bg-amber-600 text-white px-6 py-3 rounded-lg hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 disabled:opacity-50 transition-colors duration-200 text-sm font-medium shadow-sm"
               >
                 {loading ? 'Enrolling...' : 'Enroll in Programs'}
               </button>

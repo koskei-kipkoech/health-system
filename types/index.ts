@@ -38,6 +38,7 @@ export interface IClient {
 export type ProgramType = 'TB' | 'Malaria' | 'HIV' | 'Diabetes' | 'Maternal' | 'Other' | string; // Allow string for custom types
 
 export interface Program {
+  _id?: string;
   id: string;
   name: string;
   type: ProgramType;

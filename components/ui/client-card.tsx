@@ -53,7 +53,7 @@ export function ClientCard({ client }: ClientCardProps) {
 
           <div className="pt-4 mt-4 border-t border-neutral-200 dark:border-neutral-700">
             <Link
-              href={`/clients/${client._id}`}
+              href={`/clients`}
               className="inline-flex items-center text-sm font-medium text-purple-600 dark:text-purple-400 hover:text-purple-500 dark:hover:text-purple-300"
             >
               View Details

@@ -43,7 +43,7 @@ export interface Program {
   name: string;
   type: ProgramType;
   description: string;
-  goals: string;
+  goals: string[] | string;
   startDate: Date;
   endDate?: Date;
   status: 'active' | 'completed' | 'planned';

@@ -4,45 +4,51 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 interface Client {
-  id: string;
+  id?: string;
+  _id?: string;
   name: string;
   email: string;
   phone: string;
-  enrolledPrograms: string[];
+  enrolledPrograms?: string[];
 }
 
 interface ClientSearchProps {
-  onClientSelect: (client: Client) => void;
+  onClientSelect: (clientId: string) => void;
+  clients?: Client[];
 }
 
-export const ClientSearch: React.FC<ClientSearchProps> = ({ onClientSelect }) => {
+export const ClientSearch: React.FC<ClientSearchProps> = ({ onClientSelect, clients: initialClients }) => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [clients, setClients] = useState<Client[]>([]);
-  const [filteredClients, setFilteredClients] = useState<Client[]>([]);
+  const [clients, setClients] = useState<Client[]>(initialClients || []);
+  const [filteredClients, setFilteredClients] = useState<Client[]>(initialClients || []);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const fetchClients = async () => {
-      setLoading(true);
-      try {
-        const response = await fetch('/api/clients');
-        const data = await response.json();
-        setClients(data);
-        setFilteredClients(data);
-      } catch (error) {
-        console.error('Error fetching clients:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
+    if (!initialClients) {
+      const fetchClients = async () => {
+        setLoading(true);
+        try {
+          const response = await fetch('/api/clients');
+          const data = await response.json();
+          setClients(data);
+          setFilteredClients(data);
+        } catch (error) {
+          console.error('Error fetching clients:', error);
+        } finally {
+          setLoading(false);
+        }
+      };
 
-    fetchClients();
-  }, []);
+      fetchClients();
+    }
+  }, [initialClients]);
 
   useEffect(() => {
+    const lowerSearchTerm = searchTerm.toLowerCase();
     const filtered = clients.filter(client =>
-      client.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      client.email.toLowerCase().includes(searchTerm.toLowerCase())
+      client.name.toLowerCase().startsWith(lowerSearchTerm) ||
+      client.email.toLowerCase().startsWith(lowerSearchTerm) ||
+      client.phone.toLowerCase().startsWith(lowerSearchTerm)
     );
     setFilteredClients(filtered);
   }, [searchTerm, clients]);
@@ -65,19 +71,19 @@ export const ClientSearch: React.FC<ClientSearchProps> = ({ onClientSelect }) =>
         <div className="space-y-2">
           {filteredClients.map((client) => (
             <motion.div
-              key={client.id}
+              key={client._id || client.id}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3 }}
               className="p-4 rounded-lg bg-white dark:bg-gray-800 shadow-sm hover:shadow-md transition-shadow cursor-pointer"
-              onClick={() => onClientSelect(client)}
+              onClick={() => onClientSelect(client._id || client.id || '')}
             >
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{client.name}</h3>
               <p className="text-sm text-gray-600 dark:text-gray-300">{client.email}</p>
               <p className="text-sm text-gray-500 dark:text-gray-400">{client.phone}</p>
               <div className="mt-2">
                 <span className="text-xs text-gray-500 dark:text-gray-400">
-                  Programs: {client.enrolledPrograms.length}
+                  Programs: {client.enrolledPrograms?.length || 0}
                 </span>
               </div>
             </motion.div>

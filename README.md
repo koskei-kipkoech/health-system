@@ -1,24 +1,38 @@
 # Health System Management Application
 
-A comprehensive health system management application built with Next.js, MongoDB, and TypeScript. This application helps healthcare providers manage client information, medical programs, and program enrollments efficiently.
+A comprehensive health system management application built with Next.js, MongoDB, and TypeScript. This application empowers healthcare providers to efficiently manage client information, medical programs, and program enrollments.
+
+**Built with Next.js Technologies:**
+
+- [Next.js](https://nextjs.org/) - The React framework for production-grade applications
+- [React](https://react.dev/) - A JavaScript library for building user interfaces
+- [TypeScript](https://www.typescriptlang.org/) - JavaScript with static typing
+
+For an in-depth look at the project’s approach, design, and solution, check out the [My Canvas Presentation](https://www.canva.com/design/DAGlyEktuig/UsIo_dacgSz0qN8Ow-SYTA/view?utm_content=DAGlyEktuig&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h4b5d5b5184).
+
+---
 
 ## Features
 
-- Client Management
-- Medical Program Administration
-- Program Enrollment System
-- User Authentication
-- Responsive Dashboard
-- Medical History Tracking
+- **Client Management**: Register, view, update, and delete client profiles with ease.
+- **Medical Program Administration**: Create, manage, and track healthcare programs.
+- **Program Enrollment System**: Enroll clients into multiple programs seamlessly.
+- **User Authentication**: Secure login, signup, and logout features.
+- **Responsive Dashboard**: Intuitive interface for managing clients and programs.
+- **Medical History Tracking**: Store and access detailed client medical records.
+
+---
 
 ## Tech Stack
 
-- **Frontend**: Next.js 13+ with App Router, React, TypeScript
-- **Styling**: Tailwind CSS
-- **Database**: MongoDB
-- **Authentication**: NextAuth.js
-- **Form Handling**: React Hook Form
-- **Animations**: Framer Motion
+- **Frontend**: [Next.js 13+](https://nextjs.org/) with App Router, [React](https://react.dev/), [TypeScript](https://www.typescriptlang.org/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/) for rapid, responsive design
+- **Database**: [MongoDB](https://www.mongodb.com/) for scalable data storage
+- **Authentication**: [NextAuth.js](https://next-auth.js.org/) for secure user management
+- **Form Handling**: [React Hook Form](https://react-hook-form.com/) for efficient forms
+- **Animations**: [Framer Motion](https://www.framer.com/motion/) for smooth UI transitions
+
+---
 
 ## Project Structure
 
